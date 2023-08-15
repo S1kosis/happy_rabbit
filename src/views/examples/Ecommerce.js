@@ -16,6 +16,7 @@
 */
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // reactstrap components
 import {
@@ -36,6 +37,39 @@ import {
 // core components
 import ColorNavbar from "components/Navbars/ColorNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
+
+//  =========== Docs =============
+
+//   {
+//     "data": {
+//         "id": 1,
+//         "attributes": {
+//             "productTitle": "test1",
+//             "productDesc": "longtest1",
+//             "productPrice": 111,
+//             "createdAt": "2023-08-14T20:16:52.070Z",
+//             "updatedAt": "2023-08-15T19:54:15.112Z",
+//             "publishedAt": "2023-08-14T20:16:54.195Z"
+//         }
+//     },
+//     "meta": {}
+// }
+
+// =========== Code =============
+
+// export default function Ecommerce({ id = 1 }) {
+//   const [transform, setTransform] = React.useState(
+//     "translate3d(0," +
+//     (window.innerWidth >= 768 ? window.pageYOffset / 3 : 0) +
+//     "px,0)"
+//     ); // TODO: Read about react props.
+//   const url = `http://localhost:1337/api/products/${id}`; // TODO: move this to a secure file (in the .env). IMPORTANT!!!!
+//   const [activeIndex, setActiveIndex] = React.useState(0);
+//   const [animating, setAnimating] = React.useState(false);
+//   const [quantity, setQuantity] = React.useState(1);
+//   const [productId, setProductId] = React.useState(null);
+//   const [product, setProduct] = React.useState({}); // NB: If its a single use {} (Object), if List or Many use [] (Array of objects)
+//   const wrapper = React.useRef(null);
 
 const items1 = [
   {
@@ -68,6 +102,7 @@ const items1 = [
     caption: "",
     src: "0",
   },
+  
   {
     content: (
       <Container>
@@ -88,7 +123,7 @@ const items1 = [
             <img
               alt="..."
               className="d-block"
-              src={require("assets/img/rosetemp2.png")}
+              src={require("assets/img/product-pages/01-01.jpg")}
             />
           </Col>
         </Row>
@@ -137,11 +172,38 @@ export default function Ecommerce() {
       (window.innerWidth >= 768 ? window.pageYOffset / 3 : 0) +
       "px,0)"
   );
+
+  const url = `http://localhost:1337/api/products`; // TODO: move this to a secure file (in the .env). IMPORTANT!!!!
+  const [products, setProducts] = React.useState([]); // NB: If its a single use {} (Object), if List or Many use [] (Array of objects)
   const [carousel1Index, setCarousel1Index] = React.useState(0);
   const [carousel2Index, setCarousel2Index] = React.useState(0);
   const [animating1, setAnimating1] = React.useState(false);
   const [animating2, setAnimating2] = React.useState(false);
   const wrapper = React.useRef(null);
+  // Get Products (Axios call)
+  // Get the product from Strapi.
+  const getProducts = async () => {
+    const data = await axios.get(url)
+        .then(response => {
+          const statusCode = response.status;
+          setProducts(response.data.data);
+          if (statusCode !== 200) {
+            console.error("Invalid Status Code")
+            return "Products not found"; // TODO: (Alert) Set up an alert using nodemailer to admin and show an error alert on screen.
+          };
+          return response // Might need to remove
+        }).catch((err) =>{
+          console.error("Custom Error: ", err) // TODO: Remove this line
+          return "Products not found"; // TODO: Set up an alert using nodemailer to admin and show an error alert on screen.
+        }); // https://blog.logrocket.com/axios-vs-fetch-best-http-requests/
+  };
+  
+  React.useEffect(() => {
+    getProducts(); 
+    console.warn(products)
+  }, []); // Monitor this useEffect and watch for productId changes when this file becomes dynamic.
+
+  //
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -263,7 +325,7 @@ export default function Ecommerce() {
                         <div className="card-image">
                             <img
                               alt="..."
-                              src={require("assets/img/product-pages/rose1.jpg")}
+                              src={require("assets/img/product-pages/01-01.jpg")}
                             />
                         </div>
                         <CardBody>                          
@@ -305,6 +367,13 @@ export default function Ecommerce() {
                           <CardFooter>
                             <div className="price-container">
                               <span className="price">R 999</span>
+                              <span>
+                                { // TODO: Wrap product card in this products.map example.
+                                  products.map((item, index) => {
+                                    return <p>{`${item.id}: ${item.attributes.productTitle}`}</p>
+                                  })
+                                }
+                              </span>
                             </div>
                             <Button
                               className="btn-icon btn-round pull-right pulse"

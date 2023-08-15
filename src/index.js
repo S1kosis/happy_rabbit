@@ -38,7 +38,7 @@ import LandingPage from "views/examples/LandingPage.js";
 import Pricing from "views/examples/Pricing.js";
 import Ecommerce from "views/examples/Ecommerce.js";
 import ProductPage from "views/examples/ProductPage.js";
-import ProductPage01 from "views/examples/ProductPage01.js";
+import ProductPage01 from "views/examples/ProductPage01.jsx";
 import ProductPage02 from "views/examples/ProductPage02.js";
 import ProductPage03 from "views/examples/ProductPage03.js";
 import ProductPage04 from "views/examples/ProductPage04.js";

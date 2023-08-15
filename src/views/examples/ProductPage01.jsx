@@ -1,7 +1,11 @@
+// =========== Imports =============
+
 import React from "react";
 // react plugin used to create DropdownMenu for selecting items
 // import Select from "react-select";
 
+// TODO: Use axios to interact with Strapi.
+import axios from "axios";
 // reactstrap components
 import {
   Button,
@@ -14,18 +18,39 @@ import {
   CarouselItem,
   CarouselIndicators,
 } from "reactstrap";
+import { useState, useEffect } from 'react';
+
 
 // core components
 import ColorNavbar from "components/Navbars/ColorNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 
+
+// =========== Docs =============
+
+//   {
+//     "data": {
+//         "id": 1,
+//         "attributes": {
+//             "productTitle": "test1",
+//             "productDesc": "longtest1",
+//             "productPrice": 111,
+//             "createdAt": "2023-08-14T20:16:52.070Z",
+//             "updatedAt": "2023-08-15T19:54:15.112Z",
+//             "publishedAt": "2023-08-14T20:16:54.195Z"
+//         }
+//     },
+//     "meta": {}
+// }
+
+// =========== Code =============
 const items = [
   {
     content: (
       <img
         alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose1.jpg")}
+        className="d-block"        
+        src="http://localhost:1337/uploads/01_08_5e1169eb05.jpg"
       />
     ),
     altText: "",
@@ -37,89 +62,119 @@ const items = [
       <img
         alt="..."
         className="d-block"
-        src={require("assets/img/product-pages/rose2.jpg")}
+        src={require("assets/img/product-pages/01-03.jpg")}
       />
     ),
     altText: "",
     caption: "",
     src: "1",
   },
-  {
-    content: (
-      <img
-        alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose3.jpg")}
-      />
-    ),
-    altText: "",
-    caption: "",
-    src: "2",
-  },
-  {
-    content: (
-      <img
-        alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose4.jpg")}
-      />
-    ),
-    altText: "",
-    caption: "",
-    src: "2",
-  },
-  {
-    content: (
-      <img
-        alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose5.jpg")}
-      />
-    ),
-    altText: "",
-    caption: "",
-    src: "2",
-  },
-  {
-    content: (
-      <img
-        alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose6.jpg")}
-      />
-    ),
-    altText: "",
-    caption: "",
-    src: "2",
-  },
-  {
-    content: (
-      <img
-        alt="..."
-        className="d-block"
-        src={require("assets/img/product-pages/rose7.jpg")}
-      />
-    ),
-    altText: "",
-    caption: "",
-    src: "2",
-  },
+  // {
+  //   content: (
+  //     <img
+  //       alt="..."
+  //       className="d-block"
+  //       src={require("assets/img/product-pages/rose3.jpg")}
+  //     />
+  //   ),
+  //   altText: "",
+  //   caption: "",
+  //   src: "2",
+  // },
+  // {
+  //   content: (
+  //     <img
+  //       alt="..."
+  //       className="d-block"
+  //       src={require("assets/img/product-pages/rose4.jpg")}
+  //     />
+  //   ),
+  //   altText: "",
+  //   caption: "",
+  //   src: "2",
+  // },
+  // {
+  //   content: (
+  //     <img
+  //       alt="..."
+  //       className="d-block"
+  //       src={require("assets/img/product-pages/rose5.jpg")}
+  //     />
+  //   ),
+  //   altText: "",
+  //   caption: "",
+  //   src: "2",
+  // },
+  // {
+  //   content: (
+  //     <img
+  //       alt="..."
+  //       className="d-block"
+  //       src={require("assets/img/product-pages/rose6.jpg")}
+  //     />
+  //   ),
+  //   altText: "",
+  //   caption: "",
+  //   src: "2",
+  // },
+  // {
+  //   content: (
+  //     <img
+  //       alt="..."
+  //       className="d-block"
+  //       src={require("assets/img/product-pages/rose7.jpg")}
+  //     />
+  //   ),
+  //   altText: "",
+  //   caption: "",
+  //   src: "2",
+  // },
 ];
 
-export default function ProductPage() {
+export default function ProductPage({ id = 1 }) { // TODO: Read about react props.
+  const url = `http://localhost:1337/api/products/${id}`; // TODO: move this to a secure file (in the .env). IMPORTANT!!!!
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [animating, setAnimating] = React.useState(false);
   const [quantity, setQuantity] = React.useState(1);
+  const [productId, setProductId] = React.useState(null);
+  const [product, setProduct] = React.useState({}); // NB: If its a single use {} (Object), if List or Many use [] (Array of objects)
   const wrapper = React.useRef(null);
+
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     wrapper.current.scrollTop = 0;
     document.body.classList.add("product-page01");
+    
     return function cleanup() {
       document.body.classList.remove("product-page01");
     };
   }, []);
+
+  // Get the product from Strapi.
+  const getProduct = async () => {    
+    const data = await axios.get(url)
+        .then(response => {
+          const statusCode = response.status;
+          setProductId(response.data.data.id);
+          setProduct(response.data.data.attributes);
+          if (statusCode !== 200) {
+            console.error("Invalid Status Code")
+            return "Product not found"; // TODO: (Alert) Set up an alert using nodemailer to admin and show an error alert on screen.
+          };
+          console.log("*** Product: ", response) // TODO: Remove this line
+          return response // Might need to remove
+        }).catch((err) =>{
+          console.error("Custom Error: ", err) // TODO: Remove this line
+          return "Product not found"; // TODO: Set up an alert using nodemailer to admin and show an error alert on screen.
+        }); // https://blog.logrocket.com/axios-vs-fetch-best-http-requests/
+  };
+  
+  useEffect(() => {
+    getProduct();
+    console.warn(product, productId)
+  }, []); // Monitor this useEffect and watch for productId changes when this file becomes dynamic.
+
   const onExiting = () => {
     setAnimating(true);
   };
@@ -151,6 +206,7 @@ export default function ProductPage() {
     setQuantity(quantity === 100 ? 100 : quantity + 1);
   };
 
+  console.log("@=> ", product, productId)
   return (
     <>
       <ColorNavbar />      
@@ -224,16 +280,20 @@ export default function ProductPage() {
                 </Carousel>
               </Col>
               <Col className="mx-auto" lg="6" md="12">
-                <h2 className="title text-primary">Triple Action Rose Vibrator</h2>                              
-                <h2 className="main-price">R 999</h2>
+                <h2 className="title text-primary">{ product.productTitle }</h2>
+                {/* <h2 className="title text-primary">Rose</h2>                               */}
+                <h2 className="main-price">R { product.productPrice }</h2>
                 <h5 className="category">Description</h5>
                 <p className="description text-white">
+                  {  product.productDesc }
+                </p>
+                {/* <p className="description text-white">                  
                 The Triple action Rose vibrator was designed with one thing in mind… Experience! <br/>                
 Boasting 5 thrust and vibration modes as well as 7 “tongue licking” modes to enhance and excite. The independent operating modes allow you to personalize the experience to suit your desire, whether it be during personal time, or with a partner.
 This Happy Rabbit favorite is silent and has built in USB magnetic charging (so no need to fuss about AA batteries).
 Made from high quality silicone (ABS), 100% waterproof and easily cleanable, making the Rose Vibrator the perfect sexy companion
 
-                </p>
+                </p> */}
                 <br />
                 <Row className="pick-size">
                   <Col lg="4" md="4">
