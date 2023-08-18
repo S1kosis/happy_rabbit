@@ -1,3 +1,19 @@
+/*!
+
+=========================================================
+* BLK Design System PRO React - v1.2.2
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/blk-design-system-pro-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -21,7 +37,7 @@ import {
 // core components
 import ColorNavbar from "components/Navbars/ColorNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
-import BackScroller from "components/Navbars/BackScroller";
+import BackScroller from "components/Navbars/BackScroller.js"
 
 //  =========== Docs =============
 
@@ -86,7 +102,69 @@ const items1 = [
     altText: "",
     caption: "",
     src: "0",
-  },  
+  },
+  
+  {
+    content: (
+      <Container>
+        <Row>
+          <Col className="mr-auto" md="5">
+            <div className="space-100" />
+            <CardTitle tag="h3">CB and JG</CardTitle>
+            <h3 className="text-warning">• • •</h3>
+            <h4 className="description">
+            Great product, we had a similar item from another manufacturer that was weak and quit working. This was a replacement. 
+            We are happy we made this choice. It is less expensive, but much better quality, and stronger thrusting and vibrations. 
+            The "tail or stem" is actually what she likes best. It has thrust and also has vibration settings. So it can move 
+            back and forth over the most sensitive areas at the same time stimulating with several levels of vibration. 
+            This one will keep her arched up with toes curled! 
+            </h4>
+            </Col>
+          <Col className="ml-auto" md="6">
+            <img
+              alt="..."
+              className="d-block"
+              src={require("assets/img/product-pages/01-01.jpg")}
+            />
+          </Col>
+        </Row>
+      </Container>
+    ),
+    altText: "",
+    caption: "",
+    src: "1",
+  },
+  {
+    content: (
+      <Container>
+        <Row>
+          <Col className="mr-auto" md="5">
+            <div className="space-100" />
+            <CardTitle tag="h3">NJVM</CardTitle>
+            <h3 className="text-warning">• • •</h3>
+            <h4 className="description">
+            I don’t play with myself because I either don’t know how to do it properly or it just doesn’t work for me. 
+            I’ve owned 2 other vibrators in my life time, and threw those away after first use because they didn’t do absolutely 
+            anything for me. I gave up on sex until I finally fell in love and realized that I had to be in love in order to feel sexual 
+            pleasure. Turns out this device is my soulmate and I’m in love. I have never felt anything like 
+            this in my life. I am 30 years old and this thing just changed my entire life. I could have avoided so many heart breaks
+             had I found this thing sooner. Thank you!! Amazing!! Definitely recommend.
+            </h4>            
+          </Col>
+          <Col className="ml-auto" md="6">
+            <img
+              alt="..."
+              className="d-block"
+              src={require("assets/img/sucktemp2.png")}
+            />
+          </Col>
+        </Row>
+      </Container>
+    ),
+    altText: "",
+    caption: "",
+    src: "1",
+  },
 ];
 
 export default function Ecommerce() {
@@ -209,236 +287,72 @@ export default function Ecommerce() {
       setCarousel2Index(nextIndex);
     }
   };
-  products.map((item, index) => {
+  // products.map((item, index) => {}
   return (
     <>
-      <ColorNavbar />
-      <BackScroller>
-        {/* 
+
+    {/* 
         0. [MAPPING] We want to set ALLLLLL the data before renderinf (I>E RETURN -> return {}.. ^^ 3 lines up.
         1. We want an array {} of products. 
         2. The array must have everything of a product (title, description, picture, price, url, id,  #the delivery details)
         3. Create the context / component
         4. Render dynamic component.
         
-        */}
-        {/* This right here. Right niw.......... @=> Make a navbar component. and pull it in dynamically.*/}
-        <div className="header header-1">
-          <div className="page-header header-filter">
-            <div
-              className="page-header-image"
-              style={{
-                backgroundImage: "url(" + require("assets/img/hrweblogo.png") + ")", // TODO: Store in strapi.
-                transform: transform,
-              }}
-            />
-            <Container>
-              <Row>
-                <Col className="mr-auto text-left" lg="6" md="7">
-                  <h1 className="title">Only here for good vibes!</h1>              
-                </Col>
-              </Row>
-            </Container>
-          </div>
-        </div>
-        <div className="main">
-          <div className="section">
-            <Container>
-              <Row>
-                <Col className="ml-auto mr-auto text-center" md="6">
-                  <h2 className="title">All about the buzz!</h2>
-                </Col>
-                </Row>
-                <Row>
-                <Col md="12">          
-                  <Row>                    
-                    <Col lg="3" md="6">                    
-                          <Card key={index} to="/product-page02" tag={Link} className="card-product card-plain">
-                            <span className="card-image">
-                                <img
-                                  alt="..."
-                                  src={require("assets/img/product-pages/02-01.jpg")}
-                                />                          
-                            </span>
-                            <CardBody>                          
-                                <CardTitle tag="h4">
-                                  <span>
-                                    {`${product.attributes.productTitle}`}
-                                  </span>
-                                </CardTitle>                                 
-                              <CardFooter>
-                                <div className="price-container">
-                                  <span className="price">
-                                  {`R ${product.attributes.productPrice}`}
-                                  </span>
-                                </div>
-                                <Button
-                                  className="btn-icon btn-round pull-right pulse"
-                                  color="primary"
-                                  id="tooltip744986655"
-                                >
-                                  <i className="tim-icons icon-cart" />
-                                </Button>
-                                <UncontrolledTooltip
-                                  delay={0}
-                                  placement="left"
-                                  target="tooltip744986655"
-                                >
-                                  Add to Cart
-                                </UncontrolledTooltip>
-                              </CardFooter>
-                            </CardBody>
-                          </Card>                       
-                      {/* end card TODO: clean up all code for cards not used */}
-                    </Col>
-                  </Row>                
-                </Col>                   
-              </Row>
-            </Container>
-             
-          </div>
-          <div className="main">
-            <div className="section">
-            <Container>
-              <Row>
-                <Col className="ml-auto mr-auto text-center" md="6">
-                  <h2 className="title">Control at your fingertips!</h2>
-                </Col>
-              </Row>
-              <Row>
-                <Col md="12">
-                  <Row>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page05" tag={Link} className="card-product card-plain">
-                        <div className="card-image">                          
-                            <img
-                              alt="..."
-                              // src={`${url + product.data[index].attributes.productPic.data[0].attributes.url}`}
-                            />
-                            </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">Wearable Panty Vibrator</CardTitle>
-                            <Badge color="danger">APP CONTROLLED</Badge>
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 999</span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip461484140"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip461484140"
-                            >
-                              Add to Cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>
-                      {/* end card */}
-                    </Col>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page06" tag={Link} className="card-product card-plain">
-                        <div className="card-image">                          
-                            <img
-                              alt="..."
-                              src={require("assets/img/product-pages/06-01.jpg")}
-                            />                          
-                        </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">Wearable Egg Vibrator</CardTitle>
-                            <Badge color="danger">APP CONTROLLED</Badge>                          
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 549</span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip461484140"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip461484140"
-                            >
-                              Add to Cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>
-                      {/* end card */}
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-            </Container>
-            </div>
-          </div>
-          {/* section */}
-          <div className="testimonials-1 section-image">
-            <Container>
-              <Row>
-                <Col className="ml-auto mr-auto text-center" md="6">
-                  <h2 className="title">What Clients Say</h2>
-                </Col>
-              </Row>
-              <Carousel
-                activeIndex={carousel1Index}
-                next={() => next(1, items1)}
-                previous={() => previous(1, items1)}
-                className="carousel-team"
+        */}       
+      <ColorNavbar />
+      <BackScroller />
+      <Container>
+        <Row>
+          <Col className="ml-auto mr-auto text-center" md="6">
+            <h2 className="title">What Clients Say</h2>
+          </Col>
+        </Row>
+        <Carousel
+          activeIndex={carousel1Index}
+          next={() => next(1, items1)}
+          previous={() => previous(1, items1)}
+          className="carousel-team"
+        >
+          {items1.map((item, key) => {
+            return (
+              <CarouselItem
+                onExiting={() => onExiting(1)}
+                onExited={() => onExited(1)}
+                key={key}
               >
-                {items1.map((item, key) => {
-                  return (
-                    <CarouselItem
-                      onExiting={() => onExiting(1)}
-                      onExited={() => onExited(1)}
-                      key={key}
-                    >
-                      {item.content}
-                    </CarouselItem>
-                  );
-                })}
-                <a
-                  className="carousel-control-prev"
-                  data-slide="prev"
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    previous(1, items1);
-                  }}
-                  role="button"
-                >
-                  <i className="tim-icons icon-minimal-left" />
-                  <span className="sr-only">Previous</span>
-                </a>
-                <a
-                  className="carousel-control-next"
-                  data-slide="next"
-                  href="#pablo"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    next(1, items1);
-                  }}
-                  role="button"
-                >
-                  <i className="tim-icons icon-minimal-right" />
-                  <span className="sr-only">Next</span>
-                </a>
-              </Carousel>
-            </Container>
-          </div>
-        </div>
-        {/* end-main-raised */}
-        <DemoFooter />
-      </BackScroller>
+                {item.content}
+              </CarouselItem>
+            );
+          })}
+          <a
+            className="carousel-control-prev"
+            data-slide="prev"
+            href="#pablo"
+            onClick={(e) => {
+              e.preventDefault();
+              previous(1, items1);
+            }}
+            role="button"
+          >
+            <i className="tim-icons icon-minimal-left" />
+            <span className="sr-only">Previous</span>
+          </a>
+          <a
+            className="carousel-control-next"
+            data-slide="next"
+            href="#pablo"
+            onClick={(e) => {
+              e.preventDefault();
+              next(1, items1);
+            }}
+            role="button"
+          >
+            <i className="tim-icons icon-minimal-right" />
+            <span className="sr-only">Next</span>
+          </a>
+        </Carousel>
+      </Container>
+     <DemoFooter />
     </>
-  );})}
+  );
+} 
