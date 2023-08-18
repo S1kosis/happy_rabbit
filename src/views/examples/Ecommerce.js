@@ -173,7 +173,7 @@ export default function Ecommerce() {
       "px,0)"
   );
 
-  const url = `http://localhost:1337/api/products`; // TODO: move this to a secure file (in the .env). IMPORTANT!!!!
+  const url = `http://localhost:1337/api/products?populate=*`; // TODO: move this to a secure file (in the .env). IMPORTANT!!!!
   const [products, setProducts] = React.useState([]); // NB: If its a single use {} (Object), if List or Many use [] (Array of objects)
   const [carousel1Index, setCarousel1Index] = React.useState(0);
   const [carousel2Index, setCarousel2Index] = React.useState(0);
@@ -286,24 +286,33 @@ export default function Ecommerce() {
       setCarousel2Index(nextIndex);
     }
   };
-
+  // products.map((item, index) => {}
   return (
     <>
       <ColorNavbar />
       <div className="wrapper" ref={wrapper}>
+        {/* 
+        0. [MAPPING] We want to set ALLLLLL the data before renderinf (I>E RETURN -> return {}.. ^^ 3 lines up.
+        1. We want an array {} of products. 
+        2. The array must have everything of a product (title, description, picture, price, url, id,  #the delivery details)
+        3. Create the context / component
+        4. Render dynamic component.
+        
+        */}
+        {/* This right here. Right niw.......... @=> Make a navbar component. and pull it in dynamically.*/}
         <div className="header header-1">
           <div className="page-header header-filter">
             <div
               className="page-header-image"
               style={{
-                backgroundImage: "url(" + require("assets/img/hrweblogo.png") + ")",
+                backgroundImage: "url(" + require("assets/img/hrweblogo.png") + ")", // TODO: Store in strapi.
                 transform: transform,
               }}
             />
             <Container>
               <Row>
                 <Col className="mr-auto text-left" lg="6" md="7">
-                  <h1 className="title">Only here for good vibes!</h1>                       
+                  <h1 className="title">Only here for good vibes!</h1>              
                 </Col>
               </Row>
             </Container>
@@ -317,149 +326,55 @@ export default function Ecommerce() {
                   <h2 className="title">All about the buzz!</h2>
                 </Col>
               </Row>
-              <Row>
-                <Col md="12">
-                  <Row>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page01" tag={Link} className="card-product card-plain">
-                        <div className="card-image">
-                            <img
-                              alt="..."
-                              src={require("assets/img/product-pages/01-01.jpg")}
-                            />
-                        </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">Triple Action Rose Vibrator</CardTitle>    
-                                                  
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 999</span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip426328914"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip426328914"
-                            >
-                              Add to cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>
-                      {/* end card */}
+              <Row>{
+                  products.map((product, index) => {
+                    return (
+                <Col md="12">          
+                  <Row>                    
+                    <Col lg="3" md="6">                    
+                          <Card key={index} to="/product-page02" tag={Link} className="card-product card-plain">
+                            <span className="card-image">
+                                <img
+                                  alt="..."
+                                  src={require("assets/img/product-pages/02-01.jpg")}
+                                />                          
+                            </span>
+                            <CardBody>                          
+                                <CardTitle tag="h4">
+                                  <span>
+                                    {`${product.attributes.productTitle}`}
+                                  </span>
+                                </CardTitle>                                 
+                              <CardFooter>
+                                <div className="price-container">
+                                  <span className="price">
+                                  {`R ${product.attributes.productPrice}`}
+                                  </span>
+                                </div>
+                                <Button
+                                  className="btn-icon btn-round pull-right pulse"
+                                  color="primary"
+                                  id="tooltip744986655"
+                                >
+                                  <i className="tim-icons icon-cart" />
+                                </Button>
+                                <UncontrolledTooltip
+                                  delay={0}
+                                  placement="left"
+                                  target="tooltip744986655"
+                                >
+                                  Add to Cart
+                                </UncontrolledTooltip>
+                              </CardFooter>
+                            </CardBody>
+                          </Card>                       
+                      {/* end card TODO: clean up all code for cards not used */}
                     </Col>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page02" tag={Link} className="card-product card-plain">
-                        <div className="card-image">
-                            <img
-                              alt="..."
-                              src={require("assets/img/product-pages/02-01.jpg")}
-                            />                          
-                        </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">4-in-1 Silicone Vibrator</CardTitle>
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 999</span>
-                              <span>
-                                { // TODO: Wrap product card in this products.map example.
-                                  products.map((item, index) => {
-                                    return <p>{`${item.id}: ${item.attributes.productTitle}`}</p>
-                                  })
-                                }
-                              </span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip744986655"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip744986655"
-                            >
-                              Add to Cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>
-                      {/* end card */}
-                    </Col>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page03" tag={Link} className="card-product card-plain">
-                        <div className="card-image">                          
-                            <img
-                              alt="..."
-                              src={require("assets/img/product-pages/03-01.jpg")}
-                            />                          
-                        </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">Oliver James Wand</CardTitle>                          
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 999</span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip461484140"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip461484140"
-                            >
-                              Add to Cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>
-                    </Col>
-                    <Col lg="3" md="6">
-                      <Card to="/product-page04" tag={Link} className="card-product card-plain">
-                        <div className="card-image">                          
-                            <img
-                              alt="..."
-                              src={require("assets/img/product-pages/04-01.jpg")}
-                            />                          
-                        </div>
-                        <CardBody>                          
-                            <CardTitle tag="h4">10-in-1 Rabbit Vibrator</CardTitle>                          
-                          <CardFooter>
-                            <div className="price-container">
-                              <span className="price">R 999</span>
-                            </div>
-                            <Button
-                              className="btn-icon btn-round pull-right pulse"
-                              color="primary"
-                              id="tooltip461484140"
-                            >
-                              <i className="tim-icons icon-cart" />
-                            </Button>
-                            <UncontrolledTooltip
-                              delay={0}
-                              placement="left"
-                              target="tooltip461484140"
-                            >
-                              Add to Cart
-                            </UncontrolledTooltip>
-                          </CardFooter>
-                        </CardBody>
-                      </Card>                      
-                    </Col>
-                  </Row>
+                  </Row>                
                 </Col>
+                    )
+                  })
+                }
               </Row>
             </Container>
              
@@ -480,7 +395,7 @@ export default function Ecommerce() {
                         <div className="card-image">                          
                             <img
                               alt="..."
-                              src={require("assets/img/product-pages/05-01.jpg")}
+                              // src={`${url + product.data[index].attributes.productPic.data[0].attributes.url}`}
                             />
                             </div>
                         <CardBody>                          
@@ -609,4 +524,4 @@ export default function Ecommerce() {
       </div>
     </>
   );
-}
+} 
