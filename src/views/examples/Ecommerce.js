@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* BLK Design System PRO React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/blk-design-system-pro-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -37,6 +21,7 @@ import {
 // core components
 import ColorNavbar from "components/Navbars/ColorNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
+import BackScroller from "components/Navbars/BackScroller";
 
 //  =========== Docs =============
 
@@ -101,69 +86,7 @@ const items1 = [
     altText: "",
     caption: "",
     src: "0",
-  },
-  
-  {
-    content: (
-      <Container>
-        <Row>
-          <Col className="mr-auto" md="5">
-            <div className="space-100" />
-            <CardTitle tag="h3">CB and JG</CardTitle>
-            <h3 className="text-warning">• • •</h3>
-            <h4 className="description">
-            Great product, we had a similar item from another manufacturer that was weak and quit working. This was a replacement. 
-            We are happy we made this choice. It is less expensive, but much better quality, and stronger thrusting and vibrations. 
-            The "tail or stem" is actually what she likes best. It has thrust and also has vibration settings. So it can move 
-            back and forth over the most sensitive areas at the same time stimulating with several levels of vibration. 
-            This one will keep her arched up with toes curled! 
-            </h4>
-            </Col>
-          <Col className="ml-auto" md="6">
-            <img
-              alt="..."
-              className="d-block"
-              src={require("assets/img/product-pages/01-01.jpg")}
-            />
-          </Col>
-        </Row>
-      </Container>
-    ),
-    altText: "",
-    caption: "",
-    src: "1",
-  },
-  {
-    content: (
-      <Container>
-        <Row>
-          <Col className="mr-auto" md="5">
-            <div className="space-100" />
-            <CardTitle tag="h3">NJVM</CardTitle>
-            <h3 className="text-warning">• • •</h3>
-            <h4 className="description">
-            I don’t play with myself because I either don’t know how to do it properly or it just doesn’t work for me. 
-            I’ve owned 2 other vibrators in my life time, and threw those away after first use because they didn’t do absolutely 
-            anything for me. I gave up on sex until I finally fell in love and realized that I had to be in love in order to feel sexual 
-            pleasure. Turns out this device is my soulmate and I’m in love. I have never felt anything like 
-            this in my life. I am 30 years old and this thing just changed my entire life. I could have avoided so many heart breaks
-             had I found this thing sooner. Thank you!! Amazing!! Definitely recommend.
-            </h4>            
-          </Col>
-          <Col className="ml-auto" md="6">
-            <img
-              alt="..."
-              className="d-block"
-              src={require("assets/img/sucktemp2.png")}
-            />
-          </Col>
-        </Row>
-      </Container>
-    ),
-    altText: "",
-    caption: "",
-    src: "1",
-  },
+  },  
 ];
 
 export default function Ecommerce() {
@@ -286,11 +209,11 @@ export default function Ecommerce() {
       setCarousel2Index(nextIndex);
     }
   };
-  // products.map((item, index) => {}
+  products.map((item, index) => {
   return (
     <>
       <ColorNavbar />
-      <div className="wrapper" ref={wrapper}>
+      <BackScroller>
         {/* 
         0. [MAPPING] We want to set ALLLLLL the data before renderinf (I>E RETURN -> return {}.. ^^ 3 lines up.
         1. We want an array {} of products. 
@@ -325,10 +248,8 @@ export default function Ecommerce() {
                 <Col className="ml-auto mr-auto text-center" md="6">
                   <h2 className="title">All about the buzz!</h2>
                 </Col>
-              </Row>
-              <Row>{
-                  products.map((product, index) => {
-                    return (
+                </Row>
+                <Row>
                 <Col md="12">          
                   <Row>                    
                     <Col lg="3" md="6">                    
@@ -371,10 +292,7 @@ export default function Ecommerce() {
                       {/* end card TODO: clean up all code for cards not used */}
                     </Col>
                   </Row>                
-                </Col>
-                    )
-                  })
-                }
+                </Col>                   
               </Row>
             </Container>
              
@@ -521,7 +439,6 @@ export default function Ecommerce() {
         </div>
         {/* end-main-raised */}
         <DemoFooter />
-      </div>
+      </BackScroller>
     </>
-  );
-} 
+  );})}
