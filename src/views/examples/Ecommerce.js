@@ -322,6 +322,10 @@ export default function Ecommerce() {
   <div className="main">
     <div className="section">
       <Container>
+         {
+        products.map((product, index) => {
+              return (     
+                <span>            
         <Row>
           <Col className="ml-auto mr-auto text-center" md="6">
             <h2 className="title">All about the buzz!</h2>
@@ -329,15 +333,13 @@ export default function Ecommerce() {
         </Row>
         <Row>
           <Col md="12">          
-            <Row>{
-            products.map((product, index) => {
-              return (                  
+            <Row>             
               <Col lg="3" md="6">                    
                     <Card key={index} to="/product-page02" tag={Link} className="card-product card-plain">
                       <span className="card-image">
                           <img
                             alt="..."
-                            src={`${product.attributes.productPic.data.url}`}
+                            src={require("assets/img/product-pages/02-01.jpg")}
                           />                          
                       </span>
                       <CardBody>                          
@@ -370,13 +372,14 @@ export default function Ecommerce() {
                       </CardBody>
                     </Card>                       
                 {/* end card TODO: clean up all code for cards not used */}
-              </Col>
-               )
-              })
-            }
+              </Col>              
             </Row>                
           </Col>
         </Row>
+        </span>
+         )
+        })
+      }      
       </Container>
        
     </div>
