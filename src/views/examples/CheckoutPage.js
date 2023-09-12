@@ -106,20 +106,20 @@ export default function CheckoutPage() {
                     </Form>
                     <hr className="line-primary mb-3" />
                     <Media className="align-items-center">
-                      <h3 className="h6 text-secondary mr-3">Subtotal</h3>
+                      <h3 className="h6 text-primary mr-3">Subtotal</h3>
                       <Media body className="text-right">
                         <span>$1038</span>
                       </Media>
                     </Media>
                     <Media className="align-items-center">
-                      <h3 className="h6 text-secondary mr-3">Shipping</h3>
+                      <h3 className="h6 text-primary mr-3">Shipping</h3>
                       <Media body className="text-right">
                         <span>$5.8</span>
                       </Media>
                     </Media>
                     <hr className="line-primary mb-3" />
                     <Media className="align-items-center">
-                      <h3 className="h6">Total</h3>
+                      <h3 className="h6 text-primary">Total</h3>
                       <Media body className="text-right">
                         <span className="font-weight-semi-bold">$1045.8</span>
                       </Media>
@@ -216,77 +216,7 @@ export default function CheckoutPage() {
                         </div>
                       </Col>
                     </Row>
-                    <br />
-                    <Row>
-                      <Col md="4">
-                        <div className="js-form-message mb-6">
-                          <label className="labels">Apt, suite, etc.</label>
-                          <Input
-                            aria-label="YC7B 3UT"
-                            placeholder="YC7B 3UT"
-                            type="text"
-                          />
-                        </div>
-                      </Col>
-                      <Col md="4">
-                        <div className="js-form-message mb-6">
-                          <label className="labels">
-                            City <span className="text-danger">*</span>
-                          </label>
-                          <Input
-                            aria-label="London"
-                            name="cityAddress"
-                            placeholder="London"
-                            required=""
-                            type="text"
-                          />
-                        </div>
-                      </Col>
-                      <Col md="4">
-                        <div className="mb-6">
-                          <label className="labels">
-                            Country <span className="text-danger">*</span>
-                          </label>
-                          <Select
-                            className="react-select react-select-info"
-                            classNamePrefix="react-select"
-                            placeholder="Select country"
-                            options={[
-                              { value: "", label: "Select country" },
-                              { value: "CZ", label: "Czech Republic" },
-                              { value: "DK", label: "Denmark" },
-                              { value: "DO", label: "Dominican Republic" },
-                              { value: "IQ", label: "Iraq" },
-                              { value: "IL", label: "Israel" },
-                              { value: "IT", label: "Italy" },
-                              { value: "JM", label: "Jamaica" },
-                              { value: "JP", label: "Japan" },
-                              { value: "MG", label: "Madagascar" },
-                              { value: "MT", label: "Malta" },
-                              { value: "NO", label: "Norway" },
-                              { value: "PL", label: "Poland" },
-                              { value: "PT", label: "Portugal" },
-                              { value: "RO", label: "Romania" },
-                              { value: "RU", label: "Russian Federation" },
-                              { value: "LC", label: "Saint Lucia" },
-                              { value: "WS", label: "Samoa" },
-                              { value: "SM", label: "San Marino" },
-                              { value: "SA", label: "Saudi Arabia" },
-                              { value: "ES", label: "Spain" },
-                              { value: "SZ", label: "Swaziland" },
-                              { value: "SE", label: "Sweden" },
-                              { value: "TR", label: "Turkey" },
-                              { value: "UG", label: "Uganda" },
-                              { value: "UA", label: "Ukraine" },
-                              { value: "AE", label: "United Arab Emirates" },
-                              { value: "GB", label: "United Kingdom" },
-                              { value: "US", label: "United States" },
-                              { value: "VN", label: "Viet Nam" },
-                            ]}
-                          />
-                        </div>
-                      </Col>
-                    </Row>
+                    <br />               
                     <h4 className="title">Payment method</h4>
                     <ButtonGroup
                       className="nav nav-tabs nav-tabs-primary"
