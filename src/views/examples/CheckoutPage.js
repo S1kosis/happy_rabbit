@@ -1,19 +1,3 @@
-/*!
-
-=========================================================
-* BLK Design System PRO React - v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/blk-design-system-pro-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
@@ -97,7 +81,7 @@ export default function CheckoutPage() {
                         <span>$999</span>
                       </Media>
                     </Media>
-                    <hr className="line-info mb-5" />
+                    <hr className="line-primary mb-5" />
                     <Form className="code-validate">
                       <label>Discount</label>
                       <InputGroup
@@ -114,13 +98,13 @@ export default function CheckoutPage() {
                           onBlur={(e) => setDiscountFocus(false)}
                         />
                         <InputGroupAddon addonType="append">
-                          <Button color="info" type="button">
+                          <Button color="primary" type="button">
                             Apply
                           </Button>
                         </InputGroupAddon>
                       </InputGroup>
                     </Form>
-                    <hr className="line-info mb-3" />
+                    <hr className="line-primary mb-3" />
                     <Media className="align-items-center">
                       <h3 className="h6 text-secondary mr-3">Subtotal</h3>
                       <Media body className="text-right">
@@ -133,7 +117,7 @@ export default function CheckoutPage() {
                         <span>$5.8</span>
                       </Media>
                     </Media>
-                    <hr className="line-info mb-3" />
+                    <hr className="line-primary mb-3" />
                     <Media className="align-items-center">
                       <h3 className="h6">Total</h3>
                       <Media body className="text-right">
@@ -220,7 +204,7 @@ export default function CheckoutPage() {
                       <Col md="4">
                         <div className="js-form-message mb-6">
                           <label className="labels">
-                            Postcode/Zip <span className="text-danger">*</span>
+                            Postal code<span className="text-danger">*</span>
                           </label>
                           <Input
                             aria-label="340112"
@@ -309,7 +293,7 @@ export default function CheckoutPage() {
                       role="tablist"
                     >
                       <Button
-                        color="info"
+                        color="primary"
                         href="#pablo"
                         className={classnames("btn-simple", {
                           active: paymentTabs === 1,
@@ -323,7 +307,7 @@ export default function CheckoutPage() {
                         Credit Card
                       </Button>
                       <Button
-                        color="info"
+                        color="primary"
                         href="#pablo"
                         className={classnames("btn-simple", {
                           active: paymentTabs === 2,
@@ -400,7 +384,7 @@ export default function CheckoutPage() {
                             <span className="fas fa-angle-left mr-2" />
                             Return to cart
                           </a>
-                          <Button color="info" size="sm" type="button">
+                          <Button color="primary" size="sm" type="button">
                             Order now
                           </Button>
                         </div>

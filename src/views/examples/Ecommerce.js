@@ -37,7 +37,7 @@ import {
 // core components
 import ColorNavbar from "components/Navbars/ColorNavbar.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
-import BackScroller from "components/Navbars/BackScroller.js"
+// import BackScroller from "components/Navbars/BackScroller.js"
 
 //  =========== Docs =============
 
@@ -287,7 +287,7 @@ export default function Ecommerce() {
       setCarousel2Index(nextIndex);
     }
   };
-  // products.map((item, index) => {}
+  // products.map((item, index) => {
   return (
     <>
 
@@ -321,19 +321,19 @@ export default function Ecommerce() {
   </div>
   <div className="main">
     <div className="section">
+            
       <Container>
-         {
-        products.map((product, index) => {
-              return (     
-                <span>            
         <Row>
           <Col className="ml-auto mr-auto text-center" md="6">
             <h2 className="title">All about the buzz!</h2>
           </Col>
         </Row>
         <Row>
-          <Col md="12">          
+          <Col md="12">
             <Row>             
+          {
+        products.map((product, index) => {
+              return (                            
               <Col lg="3" md="6">                    
                     <Card key={index} to="/product-page02" tag={Link} className="card-product card-plain">
                       <span className="card-image">
@@ -370,18 +370,16 @@ export default function Ecommerce() {
                           </UncontrolledTooltip>
                         </CardFooter>
                       </CardBody>
-                    </Card>                       
-                {/* end card TODO: clean up all code for cards not used */}
-              </Col>              
-            </Row>                
+                    </Card>                                          
+              </Col>
+              )
+        }
+        )
+      }              
+            </Row>
           </Col>
         </Row>
-        </span>
-         )
-        })
-      }      
-      </Container>
-       
+      </Container>               
     </div>
     <div className="main">
       <div className="section">
@@ -524,4 +522,4 @@ export default function Ecommerce() {
      <DemoFooter />
     </>
   );
-} 
+}
